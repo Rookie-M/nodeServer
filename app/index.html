@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue-amap/dist/index.js"></script>
+</head>
+<body>
+    <div id="app">
+        <el-amap vid="amap" map-style="normal" class="amap" :amap-manager="amapManager" :zoom="zoom" :events="mapEvents">
+            <!-- 1 小区-->
+            <el-amap-circle bubble="{{true}}" v-for="(circle,index) in circles" :center="circle.center" :radius="circle.radius" :fill-opacity="circle.fillOpacity" :events="circle.events" stroke-opacity="0" :visible="circle.storage.length === 0" :vid="index"></el-amap-circle>
+            
+            <!-- 2 前置仓库-->
+            <el-amap-circle bubble="{{true}}" v-for="(circle,index) in storageCircle" :center="circle.center" :radius="circle.radius" :fill-opacity="circle.fillOpacity" :fill-color="circle.fillColor"  stroke-opacity="0" :events="circle.events" :editable="editCircleIndex === index" :vid="index" :ext-data="circle.id"></el-amap-circle>
+
+            <!-- 3 -->
+            <!-- <el-amap-marker bubble="{{true}}" v-for="(marker, index) in markers" :position="marker.position" :visible="marker.visible"  :vid="index"></el-amap-marker> -->
+        </el-amap>
+        <div class="info-box">
+            <div class="title">前置倉 <span @click="fireStorage">添加</span></div> 
+            <div class="list">
+                <div class="item" v-for="(item,index) in storageCircle" @click="(editCircleIndex === index ? -1 : index)">
+                    <div class="t1">地址：{{item.address}}</div>
+                    <div class="t2">覆盖小区数量：{{item.cover}}</div>
+                    <div class="t2">覆盖sku：{{item.sku}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./index.js"> 
+    </script>
+    <style lang="scss">
+        body{
+            margin: 0;
+        }
+        .amap{
+            width: calc(100vw - 100px);
+            width: 100vw;
+            height: 100vh;
+        }
+        .info-box{
+            position: absolute;
+            left: 20px;
+            top: 50px;
+            background: #fff;
+            width: 500px;
+            box-shadow: 0 0 5px 0px rgba(0,0,0,.3);
+        }
+        .title{
+            padding: 15px 20px;
+        }
+        .list{
+            padding-bottom: 15px;
+        }
+        .title span{
+            float: right;
+            width: 60px;
+            background: #00a2eb;
+            color: #fff;
+            text-align: center;
+            cursor: pointer;
+            line-height: 24px;
+            font-size: 12px;
+        }
+        .item{
+            padding: 10px;
+            margin: 10px;
+            background: #fafafa;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        .item .t1{
+            font-size: 14px;
+        }
+        .item .t2{
+            display: inline-block;
+            margin-right: 10px;
+        }
+    </style>
+</body>
+</html>
