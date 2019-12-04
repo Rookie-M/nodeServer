@@ -1,5 +1,6 @@
 import axios from 'axios'
-axios.defaults.baseURL = 'http://192.168.0.196:3000';
+// axios.defaults.baseURL = 'http://192.168.0.196:3000';
+axios.defaults.baseURL = 'http://localhost:3000';
 axios.interceptors.request.use(config => {
     config.headers['Content-Type'] = 'application/json;charset=UTF-8';
     return config;

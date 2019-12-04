@@ -18,6 +18,7 @@ var gridSource = [];
 
 var gridArea = [];
 
+//前置仓位置
 var frontCan = [
     {lng:120.355989,lat:36.101725},
 
@@ -37,7 +38,6 @@ lngMix = getMixNum({lng: gridArea[2], lat: gridArea[3]}, {lng: gridArea[0], lat:
 latMix = getMixNum({lng: gridArea[2], lat: gridArea[3]}, {lng: gridArea[2], lat: gridArea[1]});
 // TODO
 console.log(latMix,lngMix);
-
 
 function run() {
     weilanData = mixFence();
@@ -108,6 +108,7 @@ function fenceSkuJudge() {
     findArea();
     writeXLXSFile();
 }
+//查找前置仓区域
 function findArea() {
     frontCan.forEach((center,i) => {
         gridSource.forEach(source => {
@@ -127,7 +128,7 @@ function findArea() {
     })
 }
 
-
+//导出xlsx
 function writeXLXSFile() {
     const ws = XLSX.utils.json_to_sheet(gridSource);
     const ws2 = XLSX.utils.json_to_sheet(weilanData);

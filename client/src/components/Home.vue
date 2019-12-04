@@ -31,7 +31,7 @@
 <script>
 import { AMapManager } from 'vue-amap';
 import * as Service from '@/service/index.js'
-import { constants } from 'fs';
+// import { constants } from 'fs';
 let amapManager = new AMapManager();
 export default {
     name: 'Home',
@@ -89,7 +89,9 @@ export default {
                     }
                 })
             }).then(res => {
-                window.open('http://192.168.0.196:3000/download', '_blank')
+                console.log(res)
+                // window.open('http://192.168.0.196:3000/download', '_blank')
+                window.open('http://localhost:3000/download', '_blank')
             })
         },
         fireStorage: function() {
@@ -111,7 +113,7 @@ export default {
             
             AMap.plugin('AMap.Geocoder', ()=> {
                 var geocoder = new AMap.Geocoder({
-                  city: '青岛市'
+                  city: '武汉市'
                 })
                 geocoder.getAddress(lnglat, (status, result)=> {
                   if (status === 'complete' && result.info === 'OK') {
@@ -157,7 +159,7 @@ export default {
             var lnglat = [pos.getLng(),pos.getLat()];
             AMap.plugin('AMap.Geocoder', ()=> {
                 var geocoder = new AMap.Geocoder({
-                  city: '青岛市'
+                  city: '武汉市'
                 })
                 geocoder.getAddress(lnglat, (status, result)=> {
                   if (status === 'complete' && result.info === 'OK') {
